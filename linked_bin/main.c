@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+//criar, adicionar e excluir uma linked list
 
 struct node
 {
@@ -24,24 +27,27 @@ struct node* NewNode()
 };
 
 //novo node ao novo prisma
-struct node* NewPrisma(struct node* newnode)
+struct prisma* NewPrisma()
 {
     struct prisma* newprisma = (struct node*)malloc(sizeof(struct node*));
 
-    scanf("%s", tipo);
-    scanf("%f", &altura);
-    scanf("%f", &largura);
-    scanf("%f", &profundidade);
+    printf("\nNome: ");
+    scanf("%s", newprisma -> tipo);
+    printf("\nAltura: ");
+    scanf("%f", &newprisma -> altura);
+    printf("\nLargura: ");
+    scanf("%f", &newprisma -> largura);
+    printf("\nProfundidade: ");
+    scanf("%f", &newprisma -> profundidade);
 
-    newnode -> data = newprisma;
-
-    return newnode;
+    return newprisma;
 };
 
 //novo node ao head
-struct node* InsertHead(struct node* head, struct node* newnode)
+struct node* InsertHead(struct node* head, struct node* newnode, void* ptr)
 {
-    newnode -> next = head -> next;
+    newnode -> data = ptr;
+    newnode -> next = head;
 
     return newnode;
 };
@@ -50,11 +56,17 @@ void PrintItens(struct node* head)
 {
     while(head != NULL)
     {
-        printf("%s", tipo);
-        printf("%f", altura);
-        printf("%f", largura);
-        printf("%f", profundidade);
+        PrintPrisma(head -> data);
+        head = head -> next;
     }
+};
+
+void PrintPrisma(struct prisma* prisma)
+{
+        printf("\n%s", prisma -> tipo);
+        printf("\n%f", prisma -> altura);
+        printf("\n%f", prisma -> largura);
+        printf("\n%f", prisma -> profundidade);
 };
 
 //Free
@@ -72,6 +84,34 @@ void FreeList(struct node* head)
 
 int main()
 {
-    printf("Hello world!\n");
+    int option = 0;
+    struct node* head = NULL;
+    void* novaforma;
+    struct node* ptr = NULL;
+
+    while(option != 10)
+    {
+        printf("\nOpcao: ");
+        scanf("%d", &option);
+        if(option == 1)
+        {
+            ptr = NewNode();
+            novaforma = NewPrisma();
+            head = InsertHead(head, ptr, novaforma);
+        }
+
+        if(option == 2)
+        {
+            PrintItens(head);
+        }
+        if(option == 3)
+        {
+            FreeList(head);
+            head = NULL;
+        }
+    }
+
+    FreeList(head);
+
     return 0;
 }
