@@ -87,3 +87,26 @@ p_node inverter_lista(p_node lista)
     }
     return invertida;
 }
+
+p_node concatenar_lista(p_node primeira, p_node segunda)
+{
+    p_node concatenada = NULL;
+    concatenada = primeira;
+
+    if(primeira == NULL)
+    {
+        return segunda;
+    }
+    if(segunda == NULL)
+    {
+        return primeira;
+    }
+
+    while(concatenada -> next != NULL)
+    {
+        concatenada = concatenada -> next;
+    }
+    concatenada -> next = segunda;
+
+    return primeira;
+}

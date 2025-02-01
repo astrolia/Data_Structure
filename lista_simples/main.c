@@ -9,6 +9,7 @@ int main()
     int n;
     p_node lista;
     p_node nlista;
+    p_node glista;
     lista = criar_lista();
     do
     {
@@ -19,9 +20,11 @@ int main()
             lista = add_elemento(lista, n);
         }
     }while(n > 0);
-    print_list(lista);
-    lista = inverter_lista(lista);
-    print_list(lista);
-    destruir_lista(lista);
+    nlista = copiar_lista(lista);
+    glista = concatenar_lista(lista, nlista);
+    print_list(glista);
+    destruir_lista(glista);
+    //destruir_lista(nlista);
+    //destruir_lista(lista);
     return 0;
 }
