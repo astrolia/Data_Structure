@@ -14,7 +14,7 @@ p_node criar_lista_linha()
     lista = malloc(sizeof(Node));
     lista -> linha = -1;
     lista -> Linha = lista;
-    lista -> coluna = NULL;
+    lista -> coluna = 21;
     lista -> Coluna = NULL;
     lista -> data = -1;
     return lista;
@@ -46,6 +46,8 @@ p_node new_node(int ll, int cc, int x)
 }
 
 //adiciona novo node
+//acha o antecessor e o sucessor e adiciona
+//novo node entre eles
 p_node add_node_linha(p_node lista, p_node elemento)
 {
     p_node maior;
@@ -75,12 +77,12 @@ p_node add_node_linha(p_node lista, p_node elemento)
         lista -> Linha = elemento;
     }
 
+    //maior esta caindo no sucessor do novo node
     else
     {
         elemento -> Linha = menor;
         maior -> Linha = elemento;
     }
-
     return lista;
 }
 
@@ -116,7 +118,7 @@ p_node maior_elemento_linha(p_node lista, p_node novoelemento)
     return maioratual;
 
 }
-
+//procura elemento compativel
 p_node elemento_existe_linha(p_node lista, p_node elemento)
 {
     p_node p = lista;
@@ -124,7 +126,7 @@ p_node elemento_existe_linha(p_node lista, p_node elemento)
     {
         p = p -> Linha;
 
-        if(p -> coluna = elemento -> coluna)
+        if(p -> coluna == elemento -> coluna)
         {
             return p;
         }
@@ -136,6 +138,7 @@ p_node elemento_existe_linha(p_node lista, p_node elemento)
 //acessar cada coluna onde a linha passa
 //e excluir o elemento de maneira q a coluna
 //nao fique com ponteiros para o nada
+//next step ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 void delete_lista_linha(p_node lista)
 {
     p_node p = lista -> Linha;

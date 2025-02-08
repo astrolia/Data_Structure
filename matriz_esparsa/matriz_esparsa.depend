@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1739043544 source:c:\users\natha\onedrive\documentos\github\data_structure\matriz_esparsa\main.c
+1739049333 source:c:\users\natha\onedrive\documentos\github\data_structure\matriz_esparsa\main.c
 	<stdio.h>
 	<stdlib.h>
 	"header.h"
@@ -7,7 +7,7 @@
 
 1739043185 c:\users\natha\onedrive\documentos\github\data_structure\matriz_esparsa\header.h
 
-1739046097 c:\users\natha\onedrive\documentos\github\data_structure\matriz_esparsa\source.c
+1739050974 c:\users\natha\onedrive\documentos\github\data_structure\matriz_esparsa\source.c
 	<stdio.h>
 	<stdlib.h>
 	"header.h"
