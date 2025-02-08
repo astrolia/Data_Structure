@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "header.h"
 
 //criar lista ligada com cabeça
 //criar elemento
@@ -15,6 +16,7 @@ p_node criar_lista_linha()
     lista -> Linha = lista;
     lista -> coluna = NULL;
     lista -> Coluna = NULL;
+    lista -> data = -1;
     return lista;
 }
 
@@ -26,6 +28,7 @@ p_node criar_lista_coluna()
     lista -> Linha = NULL;
     lista -> coluna = -1;
     lista -> Coluna = lista;
+    lista -> data = -1;
     return lista;
 }
 
@@ -37,48 +40,133 @@ p_node new_node(int ll, int cc, int x)
     novo -> coluna = cc;
     novo -> Linha = NULL;
     novo -> Coluna = NULL;
+    novo -> data = x;
 
     return novo;
 }
 
-p_node add_node_linha(p_node lista, int linha, p_node elemento)
+//adiciona novo node
+p_node add_node_linha(p_node lista, p_node elemento)
 {
     p_node maior;
     p_node menor;
+    p_node p = elemento_existe_linha(lista, elemento);
 
-    if(elemento_existe == 1)
+    if(p == elemento)
     {
-        //caso o elemento exista
+        p -> data = elemento -> data;
+        free(elemento);
+        return lista;
     }
 
-    maior = maior_elemento(lista, linha);
-    menor = menor_elemento(lista, linha);
+    maior = maior_elemento_linha(lista, elemento);
+    menor = maior -> Linha;
 
-    elemento -> next = menor;
-    maior -> next = elemento;
+    if(maior == lista)
+    {
+        elemento -> Linha = lista;
+        lista -> Linha = elemento;
+    }
+
+    else if(maior == elemento)
+    {
+        menor = lista -> Linha;
+        elemento -> Linha = menor;
+        lista -> Linha = elemento;
+    }
+
+    else
+    {
+        elemento -> Linha = menor;
+        maior -> Linha = elemento;
+    }
+
+    return lista;
 }
 
-p_node maior_elemento(p_node lista, int linha)
+//acha o antecessor do novo node
+p_node maior_elemento_linha(p_node lista, p_node novoelemento)
 {
     p_node maior;
-    p_node maioratual;
+    p_node maioratual = NULL;
     maior = lista;
-    if(maior -> next = lista)
+
+    //se lista vazia
+    if(maior -> Linha == lista)
     {
-        return maior;
+        return lista;
     }
 
-    while(maior -> next != lista)
+    //percorre a lista em busca do antecessor
+    while(maior -> Linha != lista)
     {
-        maior = maior -> next;
+        maior = maior -> Linha;
 
-        //busca começa pelo maior elemento sempre
-        //talvez de pra achar o menor por essa mesma busca
-        //parei aqui***************************************
-        if(maior -> linha > linha)
+        if(maior -> coluna > novoelemento -> coluna)
         {
             maioratual = maior;
         }
     }
+    //se novo node for o maior
+    if (maioratual == NULL)
+    {
+        return novoelemento;
+    }
+    // se algum node for o maior
+    return maioratual;
 
+}
+
+p_node elemento_existe_linha(p_node lista, p_node elemento)
+{
+    p_node p = lista;
+    while(p -> Linha != lista)
+    {
+        p = p -> Linha;
+
+        if(p -> coluna = elemento -> coluna)
+        {
+            return p;
+        }
+    }
+    return NULL;
+}
+
+//para fazer isso é importante
+//acessar cada coluna onde a linha passa
+//e excluir o elemento de maneira q a coluna
+//nao fique com ponteiros para o nada
+void delete_lista_linha(p_node lista)
+{
+    p_node p = lista -> Linha;
+    p_node tmp;
+    while(p -> Linha != lista)
+    {
+
+
+    }
+}
+
+void delete_lista(p_node lista)
+{
+    p_node p = lista;
+    p_node tmp;
+
+    while(p -> Linha != lista)
+    {
+        tmp = p;
+        p = p -> Linha;
+        free(tmp);
+    }
+}
+
+void print_list(p_node lista)
+{
+    p_node p = lista;
+
+    while(p -> Linha != lista)
+    {
+        p = p -> Linha;
+        printf("%d ", p -> data);
+    }
 }
