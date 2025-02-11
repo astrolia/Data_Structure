@@ -6,11 +6,33 @@
 int main()
 {
     int op = 1;
-    int x;
-    int linha;
-    int coluna;
-    p_node lista = criar_lista_linha();
+    int d;
+    int l;
+    int c;
+    int linhas;
+    int colunas;
+    int i;
     p_node novo;
+
+    printf("linhas: ");
+    scanf("%d", &linhas);
+    printf("\n");
+    printf("colunas: ");
+    scanf("%d", &colunas);
+    printf("\n");
+
+    p_node linha_matriz[linhas];
+    p_node coluna_matriz[colunas];
+
+    for(i = 0; i < linhas; i++)
+    {
+        linha_matriz[i] = criar_lista_linha();
+    }
+
+    for(i = 0; i < colunas; i++)
+    {
+        coluna_matriz[i] = criar_lista_coluna();
+    }
 
     while(op != 0)
     {
@@ -20,21 +42,49 @@ int main()
         if(op == 1)
         {
             printf("\ninfo: ");
-            scanf("%d", &x);
+            scanf("%d", &d);
             printf("\nlinha: ");
-            scanf("%d", &linha);
+            scanf("%d", &l);
             printf("\ncoluna: ");
-            scanf("%d", &coluna);
+            scanf("%d", &c);
 
-            novo = new_node(linha, coluna, x);
-            add_node_linha(lista, novo);
+            if(l > linhas || c > colunas || l < 1 || c < 1)
+            {
+                printf("\nSua matriz eh %d x %d, insira uma posicao adequada\n", linhas, colunas);
+            }
+
+            novo = new_node(l, c, d);
+
+            add_node_linha(linha_matriz[l - 1], novo);
+            add_node_coluna(coluna_matriz[c - 1], novo);
         }
         if(op == 2)
         {
-            print_list(lista);
+            for(i = 0; i < linhas; i++)
+            {
+                print_list(linha_matriz[i]);
+                printf("\n");
+            }
+        }
+
+        if(op == 3)
+        {
+            for(i = 0; i < colunas; i++)
+            {
+                print_list_coluna(coluna_matriz[i]);
+                printf("\n");
+            }
         }
     }
-    delete_lista(lista);
-    print_list(lista);
+    for(i = 0; i < linhas; i++)
+    {
+        delete_lista(linha_matriz[i]);
+    }
+
+    for(i = 0; i < linhas; i++)
+    {
+        print_list(linha_matriz[i]);
+        printf("\n");
+    }
     return 0;
 }

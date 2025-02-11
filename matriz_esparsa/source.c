@@ -7,6 +7,9 @@
 //add elemento em lista ligada linha e coluna com cabeça
 //remover elemento lista ligada com cabeça
 //apagar lista
+//se eu fizer a de apagar 1 elemento eu ja terei a de apagar todos
+//eh so fazer apagar em loop
+//parei aqui#####################################################
 
 p_node criar_lista_linha()
 {
@@ -54,7 +57,7 @@ p_node add_node_linha(p_node lista, p_node elemento)
     p_node menor;
     p_node p = elemento_existe_linha(lista, elemento);
 
-    if(p == elemento)
+    if(p != NULL)
     {
         p -> data = elemento -> data;
         free(elemento);
@@ -118,7 +121,7 @@ p_node maior_elemento_linha(p_node lista, p_node novoelemento)
     return maioratual;
 
 }
-//procura elemento compativel
+//procura elemento compativel em coluna
 p_node elemento_existe_linha(p_node lista, p_node elemento)
 {
     p_node p = lista;
@@ -138,7 +141,6 @@ p_node elemento_existe_linha(p_node lista, p_node elemento)
 //acessar cada coluna onde a linha passa
 //e excluir o elemento de maneira q a coluna
 //nao fique com ponteiros para o nada
-//next step ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 void delete_lista_linha(p_node lista)
 {
     p_node p = lista -> Linha;
@@ -170,6 +172,116 @@ void print_list(p_node lista)
     while(p -> Linha != lista)
     {
         p = p -> Linha;
+        printf("%d ", p -> data);
+    }
+}
+
+p_node add_node_coluna(p_node lista, p_node elemento)
+{
+    p_node maior;
+    p_node menor;
+    p_node p = elemento_existe_coluna(lista, elemento);
+
+    if(p != NULL)
+    {
+        p -> data = elemento -> data;
+        free(elemento);
+        return lista;
+    }
+
+    maior = maior_elemento_coluna(lista, elemento);
+    menor = maior -> Coluna;
+
+    if(maior == lista)
+    {
+        elemento -> Coluna = lista;
+        lista -> Coluna = elemento;
+    }
+
+    else if(maior == elemento)
+    {
+        menor = lista -> Coluna;
+        elemento -> Coluna = menor;
+        lista -> Coluna = elemento;
+    }
+
+    //maior esta caindo no sucessor do novo node
+    else
+    {
+        elemento -> Coluna = menor;
+        maior -> Coluna = elemento;
+    }
+    return lista;
+}
+
+//acha o antecessor do novo node
+p_node maior_elemento_coluna(p_node lista, p_node novoelemento)
+{
+    p_node maior;
+    p_node maioratual = NULL;
+    maior = lista;
+
+    //se lista vazia
+    if(maior -> Coluna == lista)
+    {
+        return lista;
+    }
+
+    //percorre a lista em busca do antecessor
+    while(maior -> Coluna != lista)
+    {
+        maior = maior -> Coluna;
+
+        if(maior -> linha > novoelemento -> linha)
+        {
+            maioratual = maior;
+        }
+    }
+    //se novo node for o maior
+    if (maioratual == NULL)
+    {
+        return novoelemento;
+    }
+    // se algum node for o maior
+    return maioratual;
+
+}
+//procura elemento compativel em linha
+p_node elemento_existe_coluna(p_node lista, p_node elemento)
+{
+    p_node p = lista;
+    while(p -> Coluna != lista)
+    {
+        p = p -> Coluna;
+
+        if(p -> linha == elemento -> linha)
+        {
+            return p;
+        }
+    }
+    return NULL;
+}
+
+void delete_lista_coluna(p_node lista)
+{
+    p_node p = lista;
+    p_node tmp;
+
+    while(p -> Coluna != lista)
+    {
+        tmp = p;
+        p = p -> Coluna;
+        free(tmp);
+    }
+}
+
+void print_list_coluna(p_node lista)
+{
+    p_node p = lista;
+
+    while(p -> Coluna != lista)
+    {
+        p = p -> Coluna;
         printf("%d ", p -> data);
     }
 }

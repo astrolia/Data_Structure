@@ -19,5 +19,11 @@ p_node maior_elemento_linha(p_node lista, p_node novoelemento);
 p_node elemento_existe_linha(p_node lista, p_node elemento);
 void delete_lista(p_node lista);
 void print_list(p_node lista);
+p_node add_node_coluna(p_node lista, p_node elemento);
+p_node maior_elemento_coluna(p_node lista, p_node novoelemento);
+p_node elemento_existe_coluna(p_node lista, p_node elemento);
+void delete_lista_coluna(p_node lista);
+void print_list_coluna(p_node lista);
+
 
 #endif // HEADER_H_INCLUDED
