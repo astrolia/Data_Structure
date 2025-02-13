@@ -2,14 +2,6 @@
 #include <stdlib.h>
 #include "header.h"
 
-//criar lista ligada com cabeça
-//criar elemento
-//add elemento em lista ligada linha e coluna com cabeça
-//remover elemento lista ligada com cabeça
-//apagar lista
-//se eu fizer a de apagar 1 elemento eu ja terei a de apagar todos
-//eh so fazer apagar em loop
-//parei aqui#####################################################
 
 p_node criar_lista_linha()
 {
@@ -17,7 +9,7 @@ p_node criar_lista_linha()
     lista = malloc(sizeof(Node));
     lista -> linha = -1;
     lista -> Linha = lista;
-    lista -> coluna = 21;
+    lista -> coluna = NULL;
     lista -> Coluna = NULL;
     lista -> data = -1;
     return lista;
@@ -37,6 +29,8 @@ p_node criar_lista_coluna()
 
 p_node new_node(int ll, int cc, int x)
 {
+    if(x == 0)
+        return NULL;
     p_node novo;
     novo = malloc(sizeof(Node));
     novo -> linha = ll;
@@ -137,43 +131,23 @@ p_node elemento_existe_linha(p_node lista, p_node elemento)
     return NULL;
 }
 
-//para fazer isso é importante
-//acessar cada coluna onde a linha passa
-//e excluir o elemento de maneira q a coluna
-//nao fique com ponteiros para o nada
-void delete_lista_linha(p_node lista)
-{
-    p_node p = lista -> Linha;
-    p_node tmp;
-    while(p -> Linha != lista)
-    {
-
-
-    }
-}
-
-void delete_lista(p_node lista)
-{
-    p_node p = lista;
-    p_node tmp;
-
-    while(p -> Linha != lista)
-    {
-        tmp = p;
-        p = p -> Linha;
-        free(tmp);
-    }
-}
-
 void print_list(p_node lista)
 {
     p_node p = lista;
 
-    while(p -> Linha != lista)
+    if(p -> Linha -> coluna == NULL)
     {
-        p = p -> Linha;
         printf("%d ", p -> data);
+        return;
     }
+
+    print_list(p -> Linha);
+    if(p -> coluna == NULL)
+    {
+        return;
+    }
+    printf("%d ", p -> data);
+    return;
 }
 
 p_node add_node_coluna(p_node lista, p_node elemento)
@@ -262,18 +236,6 @@ p_node elemento_existe_coluna(p_node lista, p_node elemento)
     return NULL;
 }
 
-void delete_lista_coluna(p_node lista)
-{
-    p_node p = lista;
-    p_node tmp;
-
-    while(p -> Coluna != lista)
-    {
-        tmp = p;
-        p = p -> Coluna;
-        free(tmp);
-    }
-}
 
 void print_list_coluna(p_node lista)
 {
@@ -285,3 +247,38 @@ void print_list_coluna(p_node lista)
         printf("%d ", p -> data);
     }
 }
+
+p_node deletar(p_node lista, int linha, int coluna)
+{
+    p_node busca;
+    p_node ant = NULL;
+    p_node ant_coluna;
+    busca = lista;
+
+    while(busca -> Linha != lista)
+    {
+        ant = busca;
+        busca = busca -> Linha;
+        if(busca -> linha == linha && busca -> coluna == coluna)
+        {
+            break;
+        }
+    }
+    if(busca == lista)
+    {
+        return NULL;
+    }
+    ant_coluna = busca;
+    while(ant_coluna -> Coluna != busca)
+    {
+        ant_coluna = ant_coluna -> Coluna;
+    }
+
+    ant -> Linha = busca -> Linha;
+    ant_coluna -> Coluna = busca -> Coluna;
+    free(busca);
+    return lista;
+
+}
+
+

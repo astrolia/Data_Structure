@@ -24,6 +24,7 @@ p_node maior_elemento_coluna(p_node lista, p_node novoelemento);
 p_node elemento_existe_coluna(p_node lista, p_node elemento);
 void delete_lista_coluna(p_node lista);
 void print_list_coluna(p_node lista);
+p_node deletar(p_node lista, int linha, int coluna);
 
 
 #endif // HEADER_H_INCLUDED
