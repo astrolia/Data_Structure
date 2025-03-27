@@ -17,7 +17,8 @@ int main()
         scanf("%d", &n);
         if(n > 0)
         {
-            lista = add_elemento(lista, n);
+            lista = add_elemento_inicio(lista, n);
+            //lista = add_elemento_final(lista, n);
         }
     }while(n > 0);
     nlista = copiar_lista(lista);

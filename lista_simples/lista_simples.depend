@@ -29,3 +29,18 @@
 	<stdlib.h>
 	"header.h"
 
+1743107369 source:/home/leviatan/Documents/Github/Data_Structure/lista_simples/main.c
+	<stdio.h>
+	<stdlib.h>
+	"header.h"
+	"Func.c"
+
+1743107337 /home/leviatan/Documents/Github/Data_Structure/lista_simples/header.h
+	<stdio.h>
+	<stdlib.h>
+
+1743107312 /home/leviatan/Documents/Github/Data_Structure/lista_simples/Func.c
+	<stdio.h>
+	<stdlib.h>
+	"header.h"
+
