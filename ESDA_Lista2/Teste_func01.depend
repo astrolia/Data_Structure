@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1743961705 source:/home/leviatan/Documents/c_codes/Teste_func01/main.c
+	<stdio.h>
+	<stdlib.h>
+
